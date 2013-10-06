@@ -1,0 +1,12 @@
+.button-link{
+	padding-left : 0px;
+}
+
+.inactive{
+	display:none !important;
+}
+
+.preloader{
+	display: inline-block;
+	margin-left : 20px;
+}
