@@ -1,3 +1,0 @@
-[06-Oct-2013 07:24:28 America/Denver] PHP Fatal error:  require(): Failed opening required 'dtb/validateData.inc' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 6
-[06-Oct-2013 07:24:35 America/Denver] PHP Fatal error:  require(): Failed opening required 'dtb/validateData.inc' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 6
-[06-Oct-2013 07:26:28 America/Denver] PHP Parse error:  syntax error, unexpected '?>', expecting function (T_FUNCTION) in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 17

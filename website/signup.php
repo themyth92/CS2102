@@ -5,8 +5,8 @@
     <link href = '../bootstrap/css/bootstrap.min.css' type = 'text/css' rel = 'stylesheet'>
     <link href = 'css/home.css' type = 'text/css' rel ='stylesheet'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/ajax.js"></script>
-    <script src='js/login.js'></script>
+    <script src="js/login/ajax.js"></script>
+    <script src='js/login/login.js'></script>
   </head>
   <body>
     <form class="form-horizontal" action='' method="POST">
