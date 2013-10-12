@@ -57,3 +57,19 @@ html, body {
 	filter: alpha(opacity = 60);
 }
 /*jquery slow laoding*/
+.inactive{
+	display:none !important;
+}
+
+.preloader{
+	display: inline-block;
+	margin-left : 20px;
+}
+
+.control-group{
+	display: inline-block;
+}
+
+.datepicker{
+	z-index:10000;
+}

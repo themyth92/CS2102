@@ -22,7 +22,7 @@
             
     	}
 
-    	public function retrieveHotelListWithLocationAndRoomType($location, $ssingle = false, $ssdouble = false, $stsingle = false, $stdouble = false){
+    	public function retrieveHotelListUsingLocation($location){
 
             //the query to execute
             $query = sprintf("SELECT ".USER_INFORMATION_TABLE."(".USER_INFO_EMAIL_COL." ,".USER_INFO_PASS_COL.") VALUES('%s', '%s')",
