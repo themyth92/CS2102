@@ -1,15 +1,17 @@
 var app = app || {};
 
 app.Markup  = (function($){
+	
 	function markupList(list){
 		var html ='';
 		if(!list){
 			html += 'None';
 		}
 		else
-			if(feature instanceof Array){
+			if(list instanceof Array){
 				for(var i = 0 ; i < list.length ; i++){
 					if( i == list.length - 1){
+						//change the list to receive number instead of string
 						html += list[i];
 					}
 					else{
@@ -35,16 +37,52 @@ app.Markup  = (function($){
 		return html;
 	}
 
+	function markupRoomType(feature){
+		var html = '';
+		if(feature instanceof Array){
+			if(feature.length == 4){
+				html += 'ss =  ' + feature[0];
+				html += 'sd =  ' + feature[1];
+				html += 'sts = ' +feature[2];
+				html += 'std = ' + feature[3];
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+		}
+		return false;
+	}
+
+	function markupPopupRoomtype(id){
+		var ss = $('#element-' + id).attr('ss');
+		var sd = $('#element-' + id).attr('sd'); 
+		var std = $('#element-' + id).attr('std');
+		var sts = $('#element-' + id).attr('sts');
+		console.log(ss);
+		if(ss == '0')
+			$('#ssroom').attr('disabled', '');
+		if(sd == '0')
+			$('#sdroom').attr('disabled', '');
+		if(sts == '0')
+			$('#stsroom').attr('disabled', '');
+		if(std == '0')
+			$('#stdroom').attr('disabled', '');
+	}
+
 	return {
 
 		hotelList : function(id, name, feature, roomType, address, phone, postalCode){
 			
 			var html = '';
-			
+			var roomType;
+			if(!roomType = markupRoomType(roomType))
+				return false;
 			if(!id && !name)
 				return ;
 			else{
-				html += "<div id = 'element-" + id + "' class = 'element well'>";
+				html += "<div id = 'element-" + id + roomType + "' class = 'element well'>";
 				html += "<h4 class = 'hotel-name text-info text-center'>" + name + "</h4>";
 				html += "<div class = 'hotel-description'>";
 				html += "<dl class='dl-horizontal'>";
@@ -64,7 +102,19 @@ app.Markup  = (function($){
 				html +=	"</div></div>";
 				return html;	
 			}
-		}
+		},
+
+		changeBookingPopup : function(id){
+			if(!id)
+				return false;
+			else{
+				var name = $('#element-' + id + ' h4').text();
+				$('#model-name').text(name);
+				$('#book-popup').attr('data-id', id);
+
+				markupPopupRoomtype(id);
+			}
+		},
 	}
 }(jQuery)); 
 
@@ -77,26 +127,20 @@ app.ButtonHandle = (function($){
 		},
 
 		bookBtnHandle : function(){
-			$('.book-btn').click(function(e){
-				var id = e.target.attr('data-id');
-				if(!id)
-					return false;
-				else{
-					var name = $('#element-' + id + ' h4').html();
-
-				}
+			$('.book-btn').on('click', function(e){
+				
+				var id = $(e.target).attr('data-id');
+				
+				app.Markup.changeBookingPopup(id);
 			})
 		},
 	};
 }(jQuery))
 
 $(document).ready(function(){
-	$('#book-popup').on('show', function(){
-		$(this).attr('data-id', '4');
-	});
 //	$('#startDate').datepicker();
 //    $('#endDate').datepicker();
-    var nowTemp = new Date();
+/*    var nowTemp = new Date();
 	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	 
 	var checkin = $('#startDate').datepicker({
@@ -118,5 +162,6 @@ $(document).ready(function(){
 	  }
 	}).on('changeDate', function(ev) {
 	  checkout.hide();
-	}).data('datepicker');
+	}).data('datepicker');*/
+	app.ButtonHandle.bookBtnHandle();
 })

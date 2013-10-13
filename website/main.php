@@ -145,7 +145,7 @@
 
 			<!-- main panel -->
 			<div id = 'main-panel' class = 'main-panel'>
-				<div id = 'element-1' class = 'element well'>
+				<div id = 'element-1' class = 'element well' ss = '0' sd = '1' sts = '0' std = '1'>
 					<h4 class = 'hotel-name text-info text-center'>What the fuck !!!</h4>
 					<div class = 'hotel-description'>
 						<dl class="dl-horizontal">
@@ -162,8 +162,8 @@
 						</dl>
 					</div>
 					<!--book button-->
-					<div class = 'align-center' data-id = '1'>
-						<input id = 'search-btn' class="btn btn-primary" type="submit" value = 'Book now!' data-toggle="modal" data-target="#book-popup">
+					<div class = 'align-center'>
+						<input id = 'search-btn' class="btn btn-primary book-btn" data-id = '1' type="submit" value = 'Book now!' data-toggle="modal" data-target="#book-popup">
 					</div>
 				</div>
 			</div>
@@ -174,12 +174,12 @@
 			  <!-- hotel name -->
 			  <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-			    <h3 id="modelName" class = 'text-info'></h3>
+			    <h3 id="model-name" class = 'text-info'></h3>
 			  </div>
 
 			  <!-- body pop up-->
 			  <div class="modal-body">
-			  	<div class = 'text-error' id = 'book-error'>jfhasf jafhjd hkfhksdhf </div>
+			  	<div class = 'text-error inactive' id = 'book-error'></div>
 			  	<div class = 'text-success inactive' id = 'book-success'>Success!</div>
 			  	<!--calendar-->
 			  	<div class = 'modal-body-group'>
@@ -207,7 +207,7 @@
 						<div class="control-group">
 						    <label class="control-label">Superior Double</label>
 						    <div class="controls">
-						      <input type="number" disabled id="sdroom" class = 'span3'>
+						      <input type="number" id="sdroom" class = 'span3'>
 						    </div>
 						</div>
 					</div>
