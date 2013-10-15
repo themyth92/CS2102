@@ -62,15 +62,84 @@
                             $no_of_room_type_1, $no_of_room_type_2,
                             $no_of_room_type_3, $no_of_room_type_4) {
             $no_day = $arr_of_date.count();
-
+            $min1 = 9999999; //dummy value
+            $min2 = 9999999; //dummy value
+            $min3 = 9999999; //dummy value
+            $min4 = 9999999; //dummy value     
+            
             // check if no of room type is 0 or not
             // if true then we don't need to check for availability
             if ($no_of_room_type_1 !=0) {
                 // count mininum number of room available each day within booking time range
-                $min = 9999999; //dummy value
-                for ($i=0; $i<$arr)
+                for ($i=0; $i<$no_day; $i++) {
+                    $no_of_room_avail = mysql_query("SELECT (r.numberOfRoom - COUNT(*))
+                                                        FROM ".BOOKING_TABLE." b 
+                                                        JOIN ".ROOM_TYPE_TABLE." r ON r.name = b.roomTypeName
+                                                        JOIN ".HOTEL_INFORMATION_TABLE." h ON h.hotelID = b.hotelID
+                                                        WHERE (
+                                                            h.hotelID = '".$hotelID."''
+                                                            AND r.name = 'Superior Single'
+                                                            AND b.startDate <= '".$arr_of_date[$i]."''
+                                                            AND b.endDate >= '".$arr_of_date[$i]."'
+                                                        ) ");
+                    $min1 = ($min < $no_of_room_avail ? $min : $no_of_room_avail);      
+                }
             }
 
+            if ($no_of_room_type_2 !=0) {
+                // count mininum number of room available each day within booking time range
+                for ($i=0; $i<$no_day; $i++) {
+                    $no_of_room_avail = mysql_query("SELECT (r.numberOfRoom - COUNT(*))
+                                                        FROM ".BOOKING_TABLE." b 
+                                                        JOIN ".ROOM_TYPE_TABLE." r ON r.name = b.roomTypeName
+                                                        JOIN ".HOTEL_INFORMATION_TABLE." h ON h.hotelID = b.hotelID
+                                                        WHERE (
+                                                            h.hotelID = '".$hotelID."''
+                                                            AND r.name = 'Superior Double'
+                                                            AND b.startDate <= '".$arr_of_date[$i]."''
+                                                            AND b.endDate >= '".$arr_of_date[$i]."'
+                                                        ) ");
+                    $min1 = ($min < $no_of_room_avail ? $min : $no_of_room_avail);      
+                }
+            }
+
+            if ($no_of_room_type_3 !=0) {
+                // count mininum number of room available each day within booking time range
+                for ($i=0; $i<$no_day; $i++) {
+                    $no_of_room_avail = mysql_query("SELECT (r.numberOfRoom - COUNT(*))
+                                                        FROM ".BOOKING_TABLE." b 
+                                                        JOIN ".ROOM_TYPE_TABLE." r ON r.name = b.roomTypeName
+                                                        JOIN ".HOTEL_INFORMATION_TABLE." h ON h.hotelID = b.hotelID
+                                                        WHERE (
+                                                            h.hotelID = '".$hotelID."''
+                                                            AND r.name = 'Standard Single'
+                                                            AND b.startDate <= '".$arr_of_date[$i]."''
+                                                            AND b.endDate >= '".$arr_of_date[$i]."'
+                                                        ) ");
+                    $min1 = ($min < $no_of_room_avail ? $min : $no_of_room_avail);      
+                }
+            }
+
+            if ($no_of_room_type_4 !=0) {
+                // count mininum number of room available each day within booking time range
+                for ($i=0; $i<$no_day; $i++) {
+                    $no_of_room_avail = mysql_query("SELECT (r.numberOfRoom - COUNT(*))
+                                                        FROM ".BOOKING_TABLE." b 
+                                                        JOIN ".ROOM_TYPE_TABLE." r ON r.name = b.roomTypeName
+                                                        JOIN ".HOTEL_INFORMATION_TABLE." h ON h.hotelID = b.hotelID
+                                                        WHERE (
+                                                            h.hotelID = '".$hotelID."''
+                                                            AND r.name = 'Standard Double'
+                                                            AND b.startDate <= '".$arr_of_date[$i]."''
+                                                            AND b.endDate >= '".$arr_of_date[$i]."'
+                                                        ) ");
+                    $min1 = ($min < $no_of_room_avail ? $min : $no_of_room_avail);      
+                }
+            }
+
+            if ($min1 == 0 || $min2 == 0 || $min3 == 0 || $min4 == 0) {
+                return false;
+            } else return true;
         }
     }
 
