@@ -134,6 +134,7 @@
                 AND B.hotelID = H.hotelID
                 AND U.role <> 1
                 AND B.status = 1"; */
+            $bookingList = new array();
             $query = sprintf("SELECT b.".BOOKING_ID_COL.", h.".HOTEL_NAME_COL.", b.".ROOM_TYPE_NAME_COL.", b.".NUMBER_OF_ROOM_COL.", b.".START_DATE_COL.", b.".END_DATE_COL.", b.".BOOKING_DATE_COL."FROM".BOOKING_TABLE."b, ".HOTEL_INFORMATION_TABLE."h,".USER_INFORMATION_TABLE."u WHERE b.".USER_INFO_EMAIL_COL." ='%s' AND b.".HOTEL_ID_COL."= h.".HOTEL_ID_COL."AND u.".USER_INFO_ROLE_COL."<> 1 AND b.".STATUS_COL."<> 0",
                                         mysql_real_escape_string($email));  
 
@@ -149,22 +150,22 @@
                     foreach($rows as $key => $value)
                     {
                         //getting number of room for each type
-                        if($rows['roomTypeName'] == ROOM_TYPE_1)
+                        if($rows['roomTypeName'] == SUPER_SINGLE)
                             $_S1 = $rows['numberOfRoom'];
                         else 
                             $_S1 = 0;
 
-                        if($rows['roomTypeName'] == ROOM_TYPE_2)
+                        if($rows['roomTypeName'] == SUPER_DOUBLE)
                             $_D1 = $rows['numberOfRoom'];
                         else 
                             $_D1 = 0;
 
-                        if($rows['roomTypeName'] == ROOM_TYPE_3)
+                        if($rows['roomTypeName'] == STANDARD_SINGLE)
                             $_S2 = $rows['numberOfRoom'];
                         else 
                             $_S2 = 0;
 
-                        if($rows['roomTypeName'] == ROOM_TYPE_4)
+                        if($rows['roomTypeName'] == STANDARD_DOUBLE)
                             $_D2 = $rows['numberOfRoom'];
                         else 
                             $_D2 = 0;
@@ -178,9 +179,12 @@
             
                         //push into big array
                         array_push($bookingList, $bookingItem);
+
                     }
                 }   
             }
+
+            return $bookingList;
         }
 	}
 ?>

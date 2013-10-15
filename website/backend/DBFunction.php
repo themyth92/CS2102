@@ -90,5 +90,32 @@
                             $room_type1, $room_type2, $room_type3, $room_type4){
             $this -> _retrieve -> retrieveHotelListFromSearch($location, $feature1, $feature2, $room_type1, $room_type2, $room_type3, $room_type4);
         }
+
+        public function dbUserRoleSearch($email)
+        {
+            $this -> _retrieve -> retriveUserRole($email);
+        }
+
+        public function dbUserBookingSearch($email)
+        {
+            if(is_null($email))
+            {
+                $this -> _display -> displayJSON(FAIL);
+                return false;
+            }
+
+            if($this -> _retrieve -> retrieveBookingListFromEmail($email))
+            {
+                $arr = $this -> _retrieve -> retrieveBookingListFromEmail($email);
+                $this -> _display -> displayJSON(SUCCESS, $arr);
+                return true;
+            }
+            else
+            {
+                $this -> _display -> displayJSON(FAIL);
+                return false;
+            }
+
+        }
     }
 ?>

@@ -59,6 +59,7 @@
 	post parameter
 	*/
 	define('MESSAGE'						, 'message');
+	define('ACTION'							, 'action');
 	define('EMAIL'							, 'email');
 	define('LOCATION'						, 'location');
 	define('PRICE_FROM'						, 'priceFrom');
@@ -69,4 +70,15 @@
 	define('ROOM_TYPE_2'					, 'roomType2');
 	define('ROOM_TYPE_3'					, 'roomType3');
 	define('ROOM_TYPE_4'					, 'roomType4');
+	/*
+		browser action
+	*/
+	define('MANAGE'							, 'manage');
+	/*	
+		table contant
+	*/
+	define('SUPER_SINGLE'					, 'Superior Single');
+	define('SUPER_DOUBLE'					, 'Superior Double');
+	define('STANDARD_SINGLE'				, 'Standard Single');
+	define('STANDARD_DOUBLE'				, 'Standard Double');
 ?>

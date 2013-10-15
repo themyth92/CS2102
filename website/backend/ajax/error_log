@@ -6,3 +6,12 @@
 [15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type4 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 48
 [15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type3 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 71
 [15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type4 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 77
+[15-Oct-2013 12:52:18 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:21 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:25 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:26 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:28 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:29 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:30 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:52:31 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+[15-Oct-2013 12:54:57 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
