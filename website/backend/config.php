@@ -18,6 +18,7 @@
 	define('HOTEL_FEATURE_TABLE'			, 'HotelFeature');
 	define('FEATURE_TABLE'					, 'Feature');
 	define('ROOM_TYPE_TABLE'				, 'RoomType');
+	define('BOOKING_TABLE'					, 'Booking');
 	/*
 		column
 	*/

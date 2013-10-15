@@ -56,6 +56,22 @@
                 }
             }
         }
+
+        public function validateRoomTypeAvailability($hotelID,
+                            $arr_of_date,
+                            $no_of_room_type_1, $no_of_room_type_2,
+                            $no_of_room_type_3, $no_of_room_type_4) {
+            $no_day = $arr_of_date.count();
+
+            // check if no of room type is 0 or not
+            // if true then we don't need to check for availability
+            if ($no_of_room_type_1 !=0) {
+                // count mininum number of room available each day within booking time range
+                $min = 9999999; //dummy value
+                for ($i=0; $i<$arr)
+            }
+
+        }
     }
 
 ?>
