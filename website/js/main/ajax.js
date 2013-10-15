@@ -22,13 +22,13 @@ app.Ajax = (function($){
 
 	function getAddress(action){
 		if(action == api.USER_ACTION.book)
-			return ADDRESS.book;
+			return api.ADDRESS.book;
 		else
 			if(action == api.USER_ACTION.manage)
-				return ADDRESS.manage;
+				return api.ADDRESS.manage;
 			else
 				if(action == api.USER_ACTION.search)
-					return ADDRESS.search;
+					return api.ADDRESS.search;
 
 		return false;
 	}	
@@ -38,7 +38,7 @@ app.Ajax = (function($){
 			
 			var addr;
 			
-			if(!addr = getAddress(action))
+			if(!(addr = getAddress(action)))
 				return false;
 
 			$.ajax({

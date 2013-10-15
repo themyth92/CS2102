@@ -52,4 +52,13 @@
 	*/
 	define('MESSAGE'						, 'message');
 	define('EMAIL'							, 'email');
+	define('LOCATION'						, 'location');
+	define('PRICE_FROM'						, 'priceFrom');
+	define('PRICE_TO'						, 'priceTo');
+	define('FEATURE_1'						, 'feature1');
+	define('FEATURE_2'						, 'feature2');
+	define('ROOM_TYPE_1'					, 'roomType1');
+	define('ROOM_TYPE_2'					, 'roomType2');
+	define('ROOM_TYPE_3'					, 'roomType3');
+	define('ROOM_TYPE_4'					, 'roomType4');
 ?>

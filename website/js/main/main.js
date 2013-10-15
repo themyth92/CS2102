@@ -191,20 +191,25 @@ app.ajaxHandle = (function($){
 				return false;
 			}
 
-		$('#feature-1').is(':checked') ? feature1 = 1 : feature1 = 0;
-		$('#feature-2').is(':checked') ? feature2 = 1 : feature2 = 0;
-		$('#room-type-1').is(':checked') ? roomType1 = 1 : roomType1 = 0;
-		$('#room-type-2').is(':checked') ? roomType2 = 1 : roomType2 = 0;
-		$('#room-type-3').is(':checked') ? roomType3 = 1 : roomType3 = 0;
-		$('#room-type-4').is(':checked') ? roomType4 = 1 : roomType4 = 0;
+		$('#feature-1').is(':checked') ? api.SEARCH.feature1 = 1 : api.SEARCH.feature1 = 0;
+		$('#feature-2').is(':checked') ? api.SEARCH.feature2 = 1 : api.SEARCH.feature2 = 0;
+		$('#room-type-1').is(':checked') ? api.SEARCH.roomType1 = 1 : api.SEARCH.roomType1 = 0;
+		$('#room-type-2').is(':checked') ? api.SEARCH.roomType2 = 1 : api.SEARCH.roomType2 = 0;
+		$('#room-type-3').is(':checked') ? api.SEARCH.roomType3 = 1 : api.SEARCH.roomType3 = 0;
+		$('#room-type-4').is(':checked') ? api.SEARCH.roomType4 = 1 : api.SEARCH.roomType4 = 0;
 
 		return true;
 	};
 
 	function searchSuccessHandle(action, data){
-		$('#app').hideLoading();
+		app.uiHandle.hideFullPageLoading();
 		//solve data success callback
 	};
+
+	function searchErrorHandle(action, error){
+		app.uiHandle.hideFullPageLoading();
+		console.log(action + ' is ' + error);
+	}
 
 	return {
 
@@ -213,7 +218,7 @@ app.ajaxHandle = (function($){
 
 			if(!retrieveSearchParams())
 				return false;
-			console.log('go gere');
+
 			app.uiHandle.showFullPageLoading();
 
 			var action = api.ACTION.search;
@@ -228,8 +233,8 @@ app.ajaxHandle = (function($){
 			postParam['roomType2'] = api.SEARCH.roomType2;
 			postParam['roomType3'] = api.SEARCH.roomType3;
 			postParam['roomType4'] = api.SEARCH.roomType4;
-
-	//		app.Ajax.ajaxCall(action, postParam);
+			console.log(postParam['feature1']);
+			app.Ajax.ajaxCall(action, postParam, searchSuccessHandle, searchErrorHandle);
  		}
 	}
 

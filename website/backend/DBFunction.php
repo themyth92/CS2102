@@ -85,5 +85,10 @@
     			return false;
     		}
     	}
+
+        public function dbUserSearch($location, $feature1, $feature2,
+                            $room_type1, $room_type2, $room_type3, $room_type4){
+            $this -> _retrieve -> retrieveHotelListFromSearch($location, $feature1, $feature2, $room_type1, $room_type2, $room_type3, $room_type4);
+        }
     }
 ?>

@@ -32,6 +32,7 @@
 
         public function retrieveHotelListFromSearch($location, $feature1, $feature2,
                             $room_type1, $room_type2, $room_type3, $room_type4) {
+
             // turn $location to lower-case word
             $location = strtolower($location);
             
@@ -74,28 +75,28 @@
             // query the hotel list based on requested info
             if ($feature_no == 0 && $room_type_no == 0) {
                 $query = "SELECT h.* FROM hotel h
-                        WHERE (INSTR(h.address, '{".$location"}') > 0)";
+                        WHERE (INSTR(h.address, '{".$location."}') > 0)";
             } elseif ($feature_no == 0) {
                 $query = "SELECT h.* FROM hotel h
                         INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
-                        WHERE (INSTR(h.address, '{".$location"}') > 0 
-                        AND (r.name = '".$room_type1"' OR r.name = '".$room_type2"' OR
-                             r.name = '".$room_type3"' OR r.name = '".$room_type4"'))";
+                        WHERE (INSTR(h.address, '{".$location."}') > 0 
+                        AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
+                             r.name = '".$room_type3."' OR r.name = '".$room_type4."'))";
             } elseif ($room_type_no == 0) {
                 $query = "SELECT h.* FROM hotel h
                         INNER JOIN HOTEL_FEATURE_TABLE hf ON h.hotelID = hf.hotelID
-                        WHERE (INSTR(h.address, '{".$location"}') > 0 
-                        AND (hf.featureID = '".$feature1"' OR hf.featureID = '".$feature2"'))";
+                        WHERE (INSTR(h.address, '{".$location."}') > 0 
+                        AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."'))";
             } else {
                 $query = "SELECT h.* FROM hotel h
                         INNER JOIN HOTEL_FEATURE_TABLE hf ON h.hotelID = hf.hotelID
                         INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
-                        WHERE (INSTR(h.address, '{".$location"}') > 0 
-                        AND (hf.featureID = '".$feature1"' OR hf.featureID = '".$feature2"')
-                        AND (r.name = '".$room_type1"' OR r.name = '".$room_type2"' OR
-                             r.name = '".$room_type3"' OR r.name = '".$room_type4"'))";
+                        WHERE (INSTR(h.address, '{".$location."}') > 0 
+                        AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
+                        AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
+                             r.name = '".$room_type3."' OR r.name = '".$room_type4."'))";
             }
-
+            
             return mysql_query($query);
         }
 	}

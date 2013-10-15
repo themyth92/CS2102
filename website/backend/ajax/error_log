@@ -1,3 +1,0 @@
-
-[06-Oct-2013 07:59:26 America/Denver] PHP Warning:  mysql_real_escape_string() expects parameter 2 to be resource, string given in /home5/themythn/public_html/CS2102/website/backend/dtb/storeData.php on line 31
-[06-Oct-2013 07:59:26 America/Denver] PHP Warning:  sprintf(): Too few arguments in /home5/themythn/public_html/CS2102/website/backend/dtb/storeData.php on line 31
