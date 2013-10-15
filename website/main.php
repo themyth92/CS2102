@@ -41,7 +41,7 @@
 				                <ul class="nav pull-right">
 				                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <?php echo $email ?> <b class="caret"></b></a>
 				                        <ul class="dropdown-menu">
-				                            <li><a href="#"><i class="icon-cog"></i> Manage booking</a></li>
+				                            <li><a href="manage.php"><i class="icon-cog"></i> Manage booking</a></li>
 				                            <li class="divider"></li>
 				                            <li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
 				                        </ul>
