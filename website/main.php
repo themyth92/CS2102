@@ -59,7 +59,7 @@
 				<!-- location -->
 				<div>
 					<label>Search location :</label>
-					<div class="input-prepend">
+					<div class="input-prepend control-group">
 						 <span class="add-on"><i class="icon-search"></i></span>
 						<input class="span4" id="location-search" type="text" placeholder="Input your location here">
 					</div>
@@ -69,12 +69,12 @@
 				<div id = 'price-range-search'>
 					<label>Price range:</label>
 					<div class="input-prepend input-append full-width">
-						<div class="btn-group">
+						<div class="btn-group control-group">
 						 		<span class="add-on">From</span>
 								<input class="span1" id="price-from" type="text"  value = '0'>
 								<span class="add-on">$</span>
 						</div>
-						<div class="btn-group pull-right">
+						<div class="btn-group pull-right control-group">
 						 		<span class="add-on">To</span>
 								<input class="span1" id="price-to" type="text" value = '0'>
 								<span class="add-on">$</span>

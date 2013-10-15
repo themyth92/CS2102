@@ -118,11 +118,128 @@ app.Markup  = (function($){
 	}
 }(jQuery)); 
 
+app.uiHandle = (function($){
+	return {
+		errorInputHandle: function (object){
+			object.addClass('error');
+		},
+
+		inputReturnNormalState : function(object){
+			object.removeClass('error');
+		},
+
+		searchReturnNormalState : function(){
+			this.inputReturnNormalState($('#location-search').closest('.control-group'));
+			this.inputReturnNormalState($('#price-from').closest('.control-group'));
+			this.inputReturnNormalState($('#price-to').closest('.control-group'));
+		},
+
+		showFullPageLoading : function(){
+			$('#app').showLoading();
+		},
+
+		hideFullPageLoading : function(){
+			$('#app').hideLoading();
+		}
+	}
+}(jQuery));
+
+app.ajaxHandle = (function($){
+	
+	var api = {
+		ACTION : {
+			search : 'search',
+		},
+
+		SEARCH : {
+			location  : null,
+			priceFrom : null,
+			priceTo   : null,
+			feature1  : null, 	//swimming pool
+			feature2  : null, 	//fitness club
+			roomType1 : null,	//sup single
+			roomType2 : null,	//sup double
+			roomType3 : null,	//standard single
+			roomType4 : null, 	//standard double
+		},
+		BOOK:{
+
+		},
+	};
+
+	function retrieveSearchParams(){
+		api.SEARCH.location = $('#location-search').val();
+
+		if(!api.SEARCH.location){
+
+			app.uiHandle.errorInputHandle($('#location-search').closest('.control-group'));
+			return false;
+		}
+
+		api.SEARCH.priceFrom = $('#price-from').val();
+		api.SEARCH.priceTo   = $('#price-to').val();
+
+		if(!$.isNumeric(api.SEARCH.priceFrom)){
+			$('#price-from').val(0);
+			app.uiHandle.errorInputHandle($('#price-from').closest('.control-group'));
+			return false;
+		}
+		else 
+			if(!$.isNumeric(api.SEARCH.priceTo)){
+				$('#price-to').val(0);
+				app.uiHandle.errorInputHandle($('#price-to').closest('.control-group'));
+				return false;
+			}
+
+		$('#feature-1').is(':checked') ? feature1 = 1 : feature1 = 0;
+		$('#feature-2').is(':checked') ? feature2 = 1 : feature2 = 0;
+		$('#room-type-1').is(':checked') ? roomType1 = 1 : roomType1 = 0;
+		$('#room-type-2').is(':checked') ? roomType2 = 1 : roomType2 = 0;
+		$('#room-type-3').is(':checked') ? roomType3 = 1 : roomType3 = 0;
+		$('#room-type-4').is(':checked') ? roomType4 = 1 : roomType4 = 0;
+
+		return true;
+	};
+
+	function searchSuccessHandle(action, data){
+		$('#app').hideLoading();
+		//solve data success callback
+	};
+
+	return {
+
+		ajaxCallSearch : function(){
+			app.uiHandle.searchReturnNormalState();
+
+			if(!retrieveSearchParams())
+				return false;
+			console.log('go gere');
+			app.uiHandle.showFullPageLoading();
+
+			var action = api.ACTION.search;
+
+			var postParam = {};
+			postParam['location']  = api.SEARCH.location;
+			postParam['priceFrom'] = api.SEARCH.priceFrom;
+			postParam['priceTo']   = api.SEARCH.priceTo;
+			postParam['feature1']  = api.SEARCH.feature1;
+			postParam['feature2']  = api.SEARCH.feature2;
+			postParam['roomType1'] = api.SEARCH.roomType1;
+			postParam['roomType2'] = api.SEARCH.roomType2;
+			postParam['roomType3'] = api.SEARCH.roomType3;
+			postParam['roomType4'] = api.SEARCH.roomType4;
+
+	//		app.Ajax.ajaxCall(action, postParam);
+ 		}
+	}
+
+}(jQuery))
+
 app.ButtonHandle = (function($){
 	return{
 		searchBtnHandle : function(){
 			$('#search-btn').click(function(){
-				//call ajax and start to do something here
+				app.ajaxHandle.ajaxCallSearch();
 			})
 		},
 
@@ -138,6 +255,8 @@ app.ButtonHandle = (function($){
 }(jQuery))
 
 $(document).ready(function(){
+
+	app.ButtonHandle.searchBtnHandle();
 //	$('#startDate').datepicker();
 //    $('#endDate').datepicker();
 /*    var nowTemp = new Date();

@@ -18,9 +18,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Main page</title>
+		<title>Your booking</title>
 		<link href = '../bootstrap/css/bootstrap.min.css' type = 'text/css' rel = 'stylesheet'>
 	    <link href = 'css/main.css' type = 'text/css' rel ='stylesheet'>
+	    <link href = 'css/manage.css' type = 'text/css' rel ='stylesheet'>
 	    <link href = 'css/datepicker.css' rel = 'stylesheet'>
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	    <script src='../bootstrap/js/bootstrap.min.js'></script>
@@ -58,29 +59,41 @@
 			<table class="table table-condensed table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Booking ID</th>
-						<th>Hotel</th>
-						<th style = 'text-align:center' colspan = '8'>RoomType</th>
-						<th>Checkin</th>
-						<th>Checkout</th>
-						<th>BookingDate</th>
-						<th style = 'text-align:center' colspan = '2'>Action</th>
+						<th rowspan = '2'>Booking ID</th>
+						<th rowspan = '2'>Hotel</th>
+						<th colspan = '4'>RoomType</th>
+						<th rowspan = '2'>Checkin</th>
+						<th rowspan = '2'>Checkout</th>
+						<th rowspan = '2'>BookingDate</th>
+						<th rowspan = '2' colspan = '2'>Action</th>
+					</tr>
+					<tr>
+						<td>Superior Single</td>
+						<td>Superior Double</td>
+						<td>Standard Single</td>
+						<td>Standard Double</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr id = 'row-1'>
 						<td>111</td>
 						<td>test</td>
-						<td>Sup Single</td>
-						<td><input class='span1' value = '1'></td>
-						<td>Sup Double</td>
-						<td><input class='span1' value = '1'></td>
-						<td>Stan Single</td>
-						<td><input class='span1' value = '1'></td>
-						<td>Stan Double</td>
-						<td><input class='span1' value = '1'></td>
-						<td><input class='span1' value = '1'></td>
-						<td><input class='span1' value = '1'></td>
+						<td><input class='span1' type = 'number' id = 'ssroom-1' value = '1'></td>
+						<td><input class='span1' type = 'number' id = 'sdroom-1' value = '1'></td>
+						<td><input class='span1' type = 'number' id = 'stsroom-1' value = '1'></td>
+						<td><input class='span1' type = 'number' id = 'stdroom-1' value = '1'></td>
+						<td>
+							<div id="checkinDate-1" class="input-append date" id = 'start-date-1' data-date data-date-format="dd-mm-yyyy">
+					    		<input class="span1" type="text" value>
+					    		<span class="add-on"><i class = "icon-calendar"></i></span>
+					 		</div>
+					 	</td>
+						<td>
+							<div class="input-append date" id ='end-date-1' data-date data-date-format="dd-mm-yyyy">
+					    		<input class="span1" type="text" value>
+					    		<span class="add-on"><i class = "icon-calendar"></i></span>
+					 		</div>
+					 	</td>
 						<td><input class='span1' value = '1'></td>
 						<td><button class = 'btn btn-primary'>Modify</button></td>
 						<td><button class = 'btn btn-danger'>Delete</button></td>
