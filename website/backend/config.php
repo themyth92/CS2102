@@ -38,6 +38,13 @@
 	define('ROOM_TYPE_NAME_COL'				, 'name');
 	define('ROOM_TYPE_PRICE_COL'			, 'price');
 	define('ROOM_TYPE_NUMBER_ROOM'			, 'numberOfRoom');
+
+	define('BOOKING_ID_COL'					, 'bookingID');
+	define('START_DATE_COL'					, 'startDate');
+	define('END_DATE_COL'					, 'endDate');
+	define('BOOKING_DATE_COL'				, 'bookingDate');
+	define('NUMBER_OF_ROOM_COL'				, 'numberOfRoom');
+	define('STATUS_COL'						, 'status');
 	/*
 		number
 	*/

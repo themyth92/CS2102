@@ -15,9 +15,6 @@ app.Ajax = (function($){
 			book : 'http://themyth92.com/CS2102/website/backend/ajax/book.php',
 			manage : 'http://themyth92.com/CS2102/website/backend/ajax/manage.php',
 		},
-
-		_this :null, 
-
 	}
 
 	function getAddress(action){
