@@ -27,8 +27,8 @@
 	    <script src='../bootstrap/js/bootstrap.min.js'></script>
 	    <script src='js/main/bootstrap-datepicker.js'></script>
 	    <script src='js/main/jquery.showLoading.min.js'></script>
-	    <script src="js/manage/ajax.js"></script>
-	    <script src='js/manage/main.js'></script>
+	    <script src="js/main/ajax.js"></script>
+	    <script src='js/manage/manage.js'></script>
 	</head>
 	<body>
 		<div id ='app' class = 'app'>
@@ -61,7 +61,7 @@
 					<tr>
 						<th rowspan = '2'>Booking ID</th>
 						<th rowspan = '2'>Hotel</th>
-						<th colspan = '4'>RoomType</th>
+						<th>RoomType</th>
 						<th rowspan = '2'>Checkin</th>
 						<th rowspan = '2'>Checkout</th>
 						<th rowspan = '2'>BookingDate</th>
@@ -69,19 +69,13 @@
 					</tr>
 					<tr>
 						<td>Superior Single</td>
-						<td>Superior Double</td>
-						<td>Standard Single</td>
-						<td>Standard Double</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id = 'main-table'>
 					<tr id = 'row-1'>
 						<td>111</td>
 						<td>test</td>
 						<td><input class='span1' type = 'number' id = 'ssroom-1' value = '1'></td>
-						<td><input class='span1' type = 'number' id = 'sdroom-1' value = '1'></td>
-						<td><input class='span1' type = 'number' id = 'stsroom-1' value = '1'></td>
-						<td><input class='span1' type = 'number' id = 'stdroom-1' value = '1'></td>
 						<td>
 							<div id="checkinDate-1" class="input-append date" id = 'start-date-1' data-date data-date-format="dd-mm-yyyy">
 					    		<input class="span1" type="text" value>
