@@ -81,33 +81,33 @@
             }            
             // query the hotel list based on requested info
             if ($feature_no == 0 && $room_type_no == 0) {
-                $query = "SELECT h.* FROM hotel h
-                        INNER JOIN ROOM_TYPE_TABLE r ON r.hotelID = h.hotelID
+                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON r.hotelID = h.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0
-                        AND r.price BETWEEN '".$lower_bound"' AND '".$upper_bound"')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
             } elseif ($feature_no == 0) {
-                $query = "SELECT h.* FROM hotel h
-                        INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
+                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
                              r.name = '".$room_type3."' OR r.name = '".$room_type4."')
-                        AND r.price BETWEEN '".$lower_bound"' AND '".$upper_bound"')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
             } elseif ($room_type_no == 0) {
-                $query = "SELECT h.* FROM hotel h
-                        INNER JOIN HOTEL_FEATURE_TABLE hf ON h.hotelID = hf.hotelID
-                        INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
+                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
-                        AND r.price BETWEEN '".$lower_bound"' AND '".$upper_bound"')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
             } else {
-                $query = "SELECT h.* FROM hotel h
-                        INNER JOIN HOTEL_FEATURE_TABLE hf ON h.hotelID = hf.hotelID
-                        INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
+                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
                         AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
                              r.name = '".$room_type3."' OR r.name = '".$room_type4."')
-                        AND r.price BETWEEN '".$lower_bound"' AND '".$upper_bound"')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
             }
             
             return mysql_query($query);
