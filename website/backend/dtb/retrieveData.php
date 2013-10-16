@@ -235,19 +235,11 @@
 
         public function retrieveBookingListFromEmail($email, $role)
         {
-            //SQL: Booking list from GIVEN 'email'
-            /*
-                "SELECT B.bookingID, H.name, B.roomTypeName, B.numberOfRoom, B.startDate, B.endDate, B.bookingDate
-                FROM Booking B, Hotel H, User U
-                WHERE B.email = '%s'
-                AND B.hotelID = H.hotelID
-                AND U.role <> 1
-                AND B.status = 1"; */
             $bookingList = array();
 
             if($role == NORMAL_USER){
                 $query = sprintf("SELECT b.".BOOKING_ID_COL.", h.".HOTEL_NAME_COL.", b.".USER_INFO_EMAIL_COL.", b.".BOOKING_ROOM_TYPE_NAME_COL.", b.".NUMBER_OF_ROOM_COL.", b.".START_DATE_COL.", b.".END_DATE_COL.", b.".BOOKING_DATE_COL." FROM ".BOOKING_TABLE." b, ".HOTEL_INFORMATION_TABLE." h,".USER_INFORMATION_TABLE." u WHERE b.".USER_INFO_EMAIL_COL." ='%s' AND b.".HOTEL_ID_COL."= h.".HOTEL_ID_COL." AND b.".STATUS_COL."<> 0 AND b."
-                                  .USER_INFO_EMAIL_COL." = u.".USER_INFO_EMAIL_COL,
+                                  .USER_INFO_EMAIL_COL." = u.".USER_INFO_EMAIL_COL." ORDER BY b.".BOOKING_DATE_COL." ASC ",
                                    mysql_real_escape_string($email)); 
 
             }
@@ -265,7 +257,7 @@
                                                  .HOTEL_INFORMATION_TABLE." h WHERE b."
                                                  .HOTEL_ID_COL."= h."
                                                  .HOTEL_ID_COL." AND b."
-                                                 .STATUS_COL."<> 0");
+                                                 .STATUS_COL."<> 0 ORDER BY b.".BOOKING_DATE_COL." ASC ");
                 }
 
             //execute the query

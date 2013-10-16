@@ -30,7 +30,7 @@
             $this -> _retrieve = new DataRetrieve();
             $this -> _store    = new DataStore();
             $this -> _display  = new DataDisplay();
-            //$this -> _update   = new dataUpdate();
+            $this -> _update   = new DataUpdate();
 	    }
 	
     	/*==================================
@@ -134,6 +134,12 @@
                 $this -> _display -> displayJSON(FAIL);
                 return false;
             }
+        }
+
+        public function dbRemoveUser($bookingID){
+            $this -> _update -> updateBookingStatus($bookingID);
+            $this -> _display -> displayJSON(SUCCESS);
+            return true;
         }
     }
 ?>

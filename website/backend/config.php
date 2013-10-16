@@ -71,10 +71,13 @@
 	define('ROOM_TYPE_2'					, 'roomType2');
 	define('ROOM_TYPE_3'					, 'roomType3');
 	define('ROOM_TYPE_4'					, 'roomType4');
+
+	define('BOOKING_ID'						, 'bookingID');
 	/*
 		browser action
 	*/
 	define('MANAGE'							, 'manage');
+	define('REMOVE'							, 'remove');
 	/*	
 		table contant
 	*/

@@ -61,37 +61,16 @@
 					<tr>
 						<th rowspan = '2'>Booking ID</th>
 						<th rowspan = '2'>Hotel</th>
-						<th>RoomType</th>
+						<th rowspan = '2'>User name</th>
+						<th rowspan = '2'>RoomType</th>
+						<th rowspan = '2'>Room amount</th>
 						<th rowspan = '2'>Checkin</th>
 						<th rowspan = '2'>Checkout</th>
 						<th rowspan = '2'>BookingDate</th>
 						<th rowspan = '2' colspan = '2'>Action</th>
 					</tr>
-					<tr>
-						<td>Superior Single</td>
-					</tr>
 				</thead>
 				<tbody id = 'main-table'>
-					<tr id = 'row-1'>
-						<td>111</td>
-						<td>test</td>
-						<td><input class='span1' type = 'number' id = 'ssroom-1' value = '1'></td>
-						<td>
-							<div id="checkinDate-1" class="input-append date" id = 'start-date-1' data-date data-date-format="dd-mm-yyyy">
-					    		<input class="span1" type="text" value>
-					    		<span class="add-on"><i class = "icon-calendar"></i></span>
-					 		</div>
-					 	</td>
-						<td>
-							<div class="input-append date" id ='end-date-1' data-date data-date-format="dd-mm-yyyy">
-					    		<input class="span1" type="text" value>
-					    		<span class="add-on"><i class = "icon-calendar"></i></span>
-					 		</div>
-					 	</td>
-						<td><input class='span1' value = '1'></td>
-						<td><button class = 'btn btn-primary'>Modify</button></td>
-						<td><button class = 'btn btn-danger'>Delete</button></td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
