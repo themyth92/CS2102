@@ -86,27 +86,46 @@
     		}
     	}
 
-        public function dbUserSearch($location, $feature1, $feature2,
+        public function dbUserSearch($location, $lower_bound, $upper_bound, $feature1, $feature2,
                             $room_type1, $room_type2, $room_type3, $room_type4){
-            $this -> _retrieve -> retrieveHotelListFromSearch($location, $feature1, $feature2, $room_type1, $room_type2, $room_type3, $room_type4);
-        }
 
-        public function dbUserRoleSearch($email)
-        {
-            $this -> _retrieve -> retriveUserRole($email);
+
+            $hotelList = $this -> _retrieve -> retrieveHotelListFromSearch($location, $lower_bound, $upper_bound, $feature1, $feature2, $room_type1, $room_type2, $room_type3, $room_type4);
+
+            if(empty($hotelList)){
+                $this -> _display ->displayJSON(FAIL);
+                return false;
+            }
+
+            $dataReturn = array();
+            foreach($hotelList as $value){
+                $hotel = $this -> _retrieve -> retrieveHotelInformation($value);
+                $feature = $this -> _retrieve -> retrieveHotelFeature($value);
+                $roomType = $this -> _retrieve -> retrieveHotelRoomType($value);
+
+                $arr = array('hotel' => $hotel, 'feature' => $feature, 'roomType' => $roomType);
+                array_push($dataReturn, $arr);
+            }
+
+            $this -> _display -> displayJSON(SUCCESS, $dataReturn);
+            return true;
+
         }
 
         public function dbUserBookingSearch($email)
-        {
+        {   
+            
             if(is_null($email))
             {
                 $this -> _display -> displayJSON(FAIL);
                 return false;
             }
 
-            if($this -> _retrieve -> retrieveBookingListFromEmail($email))
+            $role = $this -> _retrieve -> retrieveUserRole($email);
+                
+            if($this -> _retrieve -> retrieveBookingListFromEmail($email, $role))
             {
-                $arr = $this -> _retrieve -> retrieveBookingListFromEmail($email);
+                $arr = $this -> _retrieve -> retrieveBookingListFromEmail($email, $role);
                 $this -> _display -> displayJSON(SUCCESS, $arr);
                 return true;
             }
@@ -115,7 +134,6 @@
                 $this -> _display -> displayJSON(FAIL);
                 return false;
             }
-
         }
     }
 ?>

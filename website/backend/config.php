@@ -26,7 +26,7 @@
 	define('USER_INFO_PASS_COL'             , 'password');
 	define('USER_INFO_ROLE_COL'			    , 'role');
 
-	define('HOTEL_ID_COL'					, 'HotelID');
+	define('HOTEL_ID_COL'					, 'hotelID');
 	define('HOTEL_NAME_COL'					, 'name');
 	define('HOTEL_ADDRESS_COL'				, 'address');
 	define('HOTEL_CONTACT_COL'				, 'contactNum');
@@ -44,6 +44,7 @@
 	define('END_DATE_COL'					, 'endDate');
 	define('BOOKING_DATE_COL'				, 'bookingDate');
 	define('NUMBER_OF_ROOM_COL'				, 'numberOfRoom');
+	define('BOOKING_ROOM_TYPE_NAME_COL'		, 'roomTypeName');
 	define('STATUS_COL'						, 'status');
 	/*
 		number
@@ -81,4 +82,8 @@
 	define('SUPER_DOUBLE'					, 'Superior Double');
 	define('STANDARD_SINGLE'				, 'Standard Single');
 	define('STANDARD_DOUBLE'				, 'Standard Double');
+	define('FEATURE1'						, '1');
+	define('FEATURE2'						, '2');
+	define('ADMIN'							, '1');
+	define('NORMAL_USER'					, '0');
 ?>

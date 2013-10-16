@@ -23,6 +23,6 @@
 		$roomType4  = $_POST[ROOM_TYPE_4];
 
 		$db = new DBFunctions();
-		$db -> dbUserSearch($location, $feature1, $feature2, $roomType1, $roomType2, $roomType3, $roomType4);
+		$db -> dbUserSearch($location, $priceFrom, $priceTo, $feature1, $feature2, $roomType1, $roomType2, $roomType3, $roomType4);
 	}
 ?>

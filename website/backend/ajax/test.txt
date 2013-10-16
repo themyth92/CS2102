@@ -1,8 +1,1 @@
-SELECT h.* FROM hotel h
-                        INNER JOINHotelFeature hf ON h.hotelID = hf.hotelID
-                        INNER JOIN ROOM_TYPE_TABLE r ON h.hotelID = r.hotelID
-                        WHERE (INSTR(h.address, '{singapore}') > 0 
-                        AND (hf.featureID = '1' OR hf.featureID = '2')
-                        AND (r.name = 'Superior Single' OR r.name = 'Superior Double' OR
-                             r.name = '' OR r.name = '')
-                        AND r.price BETWEEN '1' AND '1')
+go here0

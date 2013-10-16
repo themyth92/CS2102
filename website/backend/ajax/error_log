@@ -1,17 +1,24 @@
-[15-Oct-2013 12:15:44 America/Denver] PHP Parse error:  syntax error, unexpected '"' AND '"' (T_CONSTANT_ENCAPSED_STRING) in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 87
-[15-Oct-2013 12:17:34 America/Denver] PHP Parse error:  syntax error, unexpected ')' in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 153
-[15-Oct-2013 12:18:37 America/Denver] PHP Warning:  Missing argument 8 for DataRetrieve::retrieveHotelListFromSearch(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 91 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 36
-[15-Oct-2013 12:18:37 America/Denver] PHP Warning:  Missing argument 9 for DataRetrieve::retrieveHotelListFromSearch(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 91 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 36
-[15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type3 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 48
-[15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type4 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 48
-[15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type3 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 71
-[15-Oct-2013 12:18:37 America/Denver] PHP Notice:  Undefined variable: room_type4 in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 77
-[15-Oct-2013 12:52:18 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:21 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:25 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:26 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:28 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:29 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:30 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:52:31 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
-[15-Oct-2013 12:54:57 America/Denver] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home5/themythn/public_html/CS2102/website/backend/dtb/validateData.php on line 71
+
+[16-Oct-2013 01:48:00 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:48:00 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:48:00 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 270
+[16-Oct-2013 01:48:46 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:48:46 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:48:46 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 270
+[16-Oct-2013 01:49:21 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:49:21 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:49:21 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 268
+[16-Oct-2013 01:50:35 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:50:35 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:50:35 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 268
+[16-Oct-2013 01:51:00 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:51:00 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:51:00 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 270
+[16-Oct-2013 01:51:51 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:51:51 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 01:52:26 America/Denver] PHP Warning:  Missing argument 2 for DataRetrieve::retrieveBookingListFromEmail(), called in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 126 and defined in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 235
+[16-Oct-2013 01:52:26 America/Denver] PHP Notice:  Undefined variable: role in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 247
+[16-Oct-2013 02:07:51 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 268
+[16-Oct-2013 02:09:01 America/Denver] PHP Notice:  Undefined variable: query in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 270
+[16-Oct-2013 02:15:32 America/Denver] PHP Parse error:  syntax error, unexpected ')' in /home5/themythn/public_html/CS2102/website/backend/DBFunction.php on line 124
+[16-Oct-2013 02:15:56 America/Denver] PHP Notice:  Undefined index: email in /home5/themythn/public_html/CS2102/website/backend/dtb/retrieveData.php on line 305
