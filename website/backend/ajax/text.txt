@@ -1,0 +1,1 @@
+INSERT INTO Booking (roomTypeName ,hotelID ,email ,startDate ,endDate ,bookingDate ,numberOfRoom) VALUES ('Standard Double','2','test','2013-10-28','2013-10-29','2013-9-18-','1')

@@ -35,8 +35,8 @@
                             $feature1, $feature2,
                             $room_type1, $room_type2, $room_type3, $room_type4) {
 
-            // turn $location to lower-case word
-            $location = strtolower($location);
+            // turn $location to lower-case word (no need)
+            //$location = strtolower($location);
             
             // if upper_bound is 0, change its value to infinite
             if ($upper_bound == 0) {
@@ -81,33 +81,58 @@
             }            
             // query the hotel list based on requested info
             if ($feature_no == 0 && $room_type_no == 0) {
-                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                /*$query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
                         INNER JOIN ".ROOM_TYPE_TABLE." r ON r.hotelID = h.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0
-                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";*/
+                $query = "SELECT DISTINCT h.hotelID FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON r.hotelID = h.hotelID
+                        WHERE (INSTR(h.address, '".$location."') > 0
+                        AND r.price BETWEEN ".$lower_bound." AND ".$upper_bound.")";
+
             } elseif ($feature_no == 0) {
-                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                /*$query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
                         INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
                              r.name = '".$room_type3."' OR r.name = '".$room_type4."')
-                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";*/
+                $query = "SELECT DISTINCT h.hotelID FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
+                        WHERE (INSTR(h.address, '".$location."') > 0 
+                        AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
+                             r.name = '".$room_type3."' OR r.name = '".$room_type4."')
+                        AND r.price BETWEEN ".$lower_bound." AND ".$upper_bound.")";
             } elseif ($room_type_no == 0) {
-                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                /*$query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
                         INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
                         INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
-                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";*/
+                $query = "SELECT DISTINCT h.hotelID FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
+                        WHERE (INSTR(h.address, '".$location."') > 0 
+                        AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
+                        AND r.price BETWEEN ".$lower_bound." AND ".$upper_bound.")";
             } else {
-                $query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
+                /*$query = "SELECT h.* FROM ".HOTEL_INFORMATION_TABLE." h
                         INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
                         INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
                         WHERE (INSTR(h.address, '{".$location."}') > 0 
                         AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
                         AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
                              r.name = '".$room_type3."' OR r.name = '".$room_type4."')
-                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";
+                        AND r.price BETWEEN '".$lower_bound."' AND '".$upper_bound."')";*/
+                $query = "SELECT DISTINCT h.hotelID FROM ".HOTEL_INFORMATION_TABLE." h
+                        INNER JOIN ".HOTEL_FEATURE_TABLE." hf ON h.hotelID = hf.hotelID
+                        INNER JOIN ".ROOM_TYPE_TABLE." r ON h.hotelID = r.hotelID
+                        WHERE (INSTR(h.address, '".$location."') > 0 
+                        AND (hf.featureID = '".$feature1."' OR hf.featureID = '".$feature2."')
+                        AND (r.name = '".$room_type1."' OR r.name = '".$room_type2."' OR
+                             r.name = '".$room_type3."' OR r.name = '".$room_type4."')
+                        AND r.price BETWEEN ".$lower_bound." AND ".$upper_bound.")";
             }
             file_put_contents('test.txt', $query);
             
@@ -138,8 +163,8 @@
                              h.".HOTEL_ADDRESS_COL.", 
                              h.".HOTEL_CONTACT_COL.", 
                              h.".HOTEL_POSTAL_COL."
-                             FROM ".HOTEL_INFORMATION_TABLE." h, ".
-                             " WHERE h.".HOTEL_NAME_COL." =  '%s'",
+                             FROM ".HOTEL_INFORMATION_TABLE." h ".
+                             " WHERE h.".HOTEL_ID_COL." =  '%s'",
                              mysql_real_escape_string($hotel));
 
             //execute the query
@@ -159,9 +184,9 @@
 
         public function retrieveHotelFeature($hotel){
 
-            $query = sprintf("SELECT f.".FEATURE_ID_COL." FROM ". FEATURE_TABLE. " f, ".HOTEL_INFORMATION_TABLE." h WHERE h.".HOTEL_NAME_COL." = '%s' AND f.".HOTEL_ID_COL ."= h. ".HOTEL_ID_COL,
+            $query = sprintf("SELECT f.".FEATURE_ID_COL." FROM ".HOTEL_FEATURE_TABLE. " f, ".HOTEL_INFORMATION_TABLE." h WHERE h.".HOTEL_ID_COL." = '%s' AND f.".HOTEL_ID_COL ."= h.".HOTEL_ID_COL,
                             mysql_real_escape_string($hotel));
-
+ 
             //execute the query
             $executeQuery = mysql_query($query);
 
@@ -184,7 +209,7 @@
 
         public function retrieveHotelRoomType($hotel){
             
-            $query = sprintf("SELECT f.".ROOM_TYPE_NAME_COL." FROM ". ROOM_TYPE_TABLE. " f, ".HOTEL_INFORMATION_TABLE." h WHERE h.".HOTEL_NAME_COL." = '%s' AND f.".HOTEL_ID_COL ."= h. ".HOTEL_ID_COL,
+            $query = sprintf("SELECT f.".ROOM_TYPE_NAME_COL." FROM ". ROOM_TYPE_TABLE. " f, ".HOTEL_INFORMATION_TABLE." h WHERE h.".HOTEL_ID_COL." = '%s' AND f.".HOTEL_ID_COL ."= h. ".HOTEL_ID_COL,
                             mysql_real_escape_string($hotel));
 
             //execute the query
@@ -303,6 +328,32 @@
             }
 
             return $bookingList;
+        }
+
+        public function retrieveBookingList($bookingID)
+        {
+            $query = ("SELECT b.".HOTEL_ID_COL.", b.".BOOKING_ROOM_TYPE_NAME_COL.", b.".NUMBER_OF_ROOM_COL
+                                 ." FROM ".BOOKING_TABLE." b WHERE b."
+                                 .BOOKING_ID_COL." = ".$bookingID);
+            $executeQuery = mysql_query($query);
+            if(!$executeQuery)
+                die();
+            else
+            {
+                $rows = mysql_fetch_array($executeQuery);
+                $hotelID = $rows[0];
+                $roomType = $rows[1];
+                $numberOfRoom = $rows[2];
+                
+                if($roomType == SUPER_SINGLE)
+                    return array($hotelID, $rows[2], 0, 0, 0);
+                if($roomType == SUPER_DOUBLE)
+                    return array($hotelID, 0, $rows[2], 0, 0);
+                if($roomType == STANDARD_SINGLE)
+                    return array($hotelID, 0, 0 ,$rows[2], 0);
+                if($roomType == STANDARD_DOUBLE)
+                    return array($hotelID, 0, 0, 0, $rows[2]);
+            }
         }
 	}
 ?>

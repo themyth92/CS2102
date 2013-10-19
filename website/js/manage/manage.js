@@ -1,3 +1,8 @@
+
+String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, "");
+};
+
 var app = app || {};
 
 app.Markup = (function($){
@@ -70,14 +75,28 @@ app.Markup = (function($){
 			html += "<td>" + username + "</td>";
 			html += checkRoomType(roomType);
 			html += "<td>";
-			html += "<div id = 'start-date-" + id + "' class = 'input-append date' data-date = '" + checkIn + "' data-date-format='yyyy-mm-dd'>";
-			html += 	"<input class='span2' type='text' readonly value = ' " + checkIn + " '>";
-			html += 	"<span class = 'add-on'><i class = 'icon-calendar'></i></span>";
-			html += "</div></td><td>";
-			html += "<div class = 'input-append date' id ='end-date-" + id + "' data-date = '" + checkOut + "' data-date-format='yyyy-mm-dd'>";
-			html += "<input class='span2' type='text' readonly value = '" + checkOut + "'>";
-			html += "<span class='add-on'><i class = 'icon-calendar'></i></span>";
-			html +=	"</div></td>";
+			
+			if(!checkCheckinDate(checkIn)){
+				html += "<div class = 'input-append date'>";
+				html += 	"<input class='span2' type='text' readonly value = ' " + checkIn + " '>";
+				html += 	"<span class = 'add-on'><i class = 'icon-calendar'></i></span>";
+				html += "</div></td><td>";
+				html += "<div class = 'input-append date'>";
+				html += 	"<input class='span2' type='text' readonly value = '" + checkOut + "'>";
+				html += 	"<span class='add-on'><i class = 'icon-calendar'></i></span>";
+				html +=	"</div></td>";
+			}
+			else{
+				html += "<div id = 'start-date-" + id + "' class = 'input-append date' data-date = '" + checkIn + "' data-date-format='yyyy-mm-dd'>";
+				html += 	"<input class='span2' type='text' readonly value = ' " + checkIn + " '>";
+				html += 	"<span class = 'add-on'><i class = 'icon-calendar'></i></span>";
+				html += "</div></td><td>";
+				html += "<div class = 'input-append date' id ='end-date-" + id + "' data-date = '" + checkOut + "' data-date-format='yyyy-mm-dd'>";
+				html += 	"<input class='span2' type='text' readonly value = '" + checkOut + "'>";
+				html += 	"<span class='add-on'><i class = 'icon-calendar'></i></span>";
+				html +=	"</div></td>";	
+			}
+
 			html += "<td>" + bookingDate + "</td>";
 
 			if(checkCheckinDate(checkIn)){
@@ -146,6 +165,19 @@ app.uiHandle = (function($){
 				checkout.hide();
 
 			}).data('datepicker');
+		},
+
+		showMessage : function(success){
+			if(success)
+				$('#message .text-success').removeClass('inactive');
+			else
+				$('#message .text-error').removeClass('inactive');
+			return true;
+		},
+
+		hideMessage : function(){
+			$('#message .text-success').addClass('inactive');
+			$('#message .text-error').addClass('inactive');
 		}
 	}
 }(jQuery))
@@ -214,6 +246,25 @@ app.ajaxHandle = (function($){
 			postParam['action'] = api.ACTION.manage;
 			app.Ajax.ajaxCall(api.ACTION.manage, postParam, retrieveBookingSuccessCallBack, errorCallBack);
 		},
+
+		modifyBookingSuccessCallback : function(action, data){
+			app.uiHandle.hideFullPageLoading();
+			
+			if(typeof data != 'undefined'){
+				if(typeof data.status != 'undefined'){
+					
+					if(data.status.code == '200')
+						app.uiHandle.showMessage(true);
+					else{
+						app.uiHandle.showMessage(false);
+						app.ajaxHandle.retrieveUserBooking();
+					}
+					return true;
+				}
+			}
+
+			return false;
+		},
 	}
 }(jQuery))
 
@@ -223,7 +274,7 @@ app.buttonHandle = (function($){
 			$(document).on('click', '.btn-delete' , function(e){
 
 				app.uiHandle.showFullPageLoading();
-
+				app.uiHandle.hideMessage();
 				var id = $(e.target).attr('data-id');
 
 				var bookingID = $('#bookingID-' + id).html();
@@ -233,6 +284,30 @@ app.buttonHandle = (function($){
 				postParam['bookingID'] = bookingID;
 				app.Ajax.ajaxCall('remove', postParam, app.ajaxHandle.removeBookingSuccessCallBack, app.ajaxHandle.errorCallBack);
 			})
+		},
+
+		saveButtonHandle : function(){
+			$('#main-table').on('click', '.btn-save', function(e){
+
+				app.uiHandle.showFullPageLoading();
+				app.uiHandle.hideMessage();
+
+				var id = $(e.target).attr('data-id');
+
+				var bookingID = $('#bookingID-' + id).html();
+				var startDate = $('#start-date-' + id + ' input').val();
+				var endDate   = $('#end-date-' + id + ' input').val();
+				
+				startDate = startDate.trim();
+				endDate   = endDate.trim();
+				console.log(startDate);
+				var postParam = {};
+				postParam['action'] = 'modify';
+				postParam['bookingID'] = bookingID;
+				postParam['startDate'] = startDate;
+				postParam['endDate']   = endDate;
+				app.Ajax.ajaxCall('modify', postParam, app.ajaxHandle.modifyBookingSuccessCallback, app.ajaxHandle.errorCallBack);
+			})
 		}
 
 	}
@@ -241,5 +316,5 @@ app.buttonHandle = (function($){
 $(document).ready(function(){
 	app.ajaxHandle.retrieveUserBooking();
 	app.buttonHandle.removeButtonHandle();
-
+	app.buttonHandle.saveButtonHandle();
 })

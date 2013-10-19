@@ -54,7 +54,10 @@
 				    </div>
 				</div>
 			</div>
-
+			<div id = 'message' class = 'text-center'>
+				<div class = 'text-error inactive'>Can not modify your booking!</div>
+				<div class = 'text-success inactive'>You have modified your booking successfully!!!</div>
+			</div>
 
 			<table class="table table-condensed table-bordered table-hover">
 				<thead>

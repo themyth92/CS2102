@@ -9,6 +9,7 @@ app.Ajax = (function($){
 			search: 'search',
 			manage: 'manage',
 			remove: 'remove',
+			modified:'modify',
 		},
 
 		ADDRESS:{
@@ -30,6 +31,9 @@ app.Ajax = (function($){
 				else
 					if(action == api.USER_ACTION.remove)
 						return api.ADDRESS.manage;
+					else
+						if(action == api.USER_ACTION.modified)
+							return api.ADDRESS.manage;
 
 		return false;
 	}	

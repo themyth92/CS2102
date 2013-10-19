@@ -1,0 +1,1 @@
+SELECT SUM(b.numberOfRoom) FROM Booking b WHERE b.hotelID =1 AND b.roomTypeName = 'Standard Double' AND b.startDate <= '2013-10-28' AND b.endDate >= '2013-10-28' AND b.status = 1

@@ -21,5 +21,15 @@
 				$db -> dbRemoveUser($bookingID);
 			}
 		}
+
+		if($_POST[ACTION] == MODIFY){
+			if(isset($_POST[BOOKING_ID]) && isset($_POST[START_DATE]) && isset($_POST[END_DATE])){
+				$bookingID = $_POST[BOOKING_ID];
+				$startDate = $_POST[START_DATE];
+				$endDate   = $_POST[END_DATE];
+
+				$db -> dbUpdateBookingInfo($bookingID, $startDate, $endDate);
+			}	
+		}
 	}
 ?>

@@ -1,3 +1,8 @@
+
+String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, "");
+};
+
 var app = app || {};
 
 app.Markup  = (function($){
@@ -37,20 +42,38 @@ app.Markup  = (function($){
 		return html;
 	}
 
-	function markupRoomType(feature){
+	function markupFeature(feature){
 		var html = '';
 		if(feature instanceof Array){
-			if(feature.length == 4){
-				html += 'ss =  ' + feature[0];
-				html += 'sd =  ' + feature[1];
-				html += 'sts = ' +feature[2];
-				html += 'std = ' + feature[3];
-			}
-			else{
-				return false;
+			if(feature.length == 2){
+
+				if(feature[0] == '1')
+					html += 'Swimming Pool, ';
+				
+				if(feature[1] == '1')
+					html += 'Fitness Club';
+
+				if(feature[0] == '0' && feature[1] == '0')
+					html += 'None';
+
+				return html;
 			}
 		}
-		else{
+
+		return false;
+	}
+
+	function markupAttrRoomType(roomType){
+		var html = '';
+		if(roomType instanceof Array){
+			if(roomType.length == 4){
+				html += "ss =  '" + roomType[0] + "'";
+				html += "sd =  '" + roomType[1] + "'";
+				html += "sts = '" + roomType[2] + "'";
+				html += "std = '" + roomType[3] + "'";
+
+				return html;
+			}
 		}
 		return false;
 	}
@@ -60,15 +83,43 @@ app.Markup  = (function($){
 		var sd = $('#element-' + id).attr('sd'); 
 		var std = $('#element-' + id).attr('std');
 		var sts = $('#element-' + id).attr('sts');
-		console.log(ss);
-		if(ss == '0')
+
+		if(ss == '0'){
 			$('#ssroom').attr('disabled', '');
-		if(sd == '0')
+			$('#ssroom').attr('value', '0');
+		}	
+		if(sd == '0'){
 			$('#sdroom').attr('disabled', '');
-		if(sts == '0')
+			$('#sdroom').attr('value', '0');
+		}
+			
+		if(sts == '0'){
 			$('#stsroom').attr('disabled', '');
-		if(std == '0')
+			$('#stsroom').attr('value', '0');
+		}
+			
+		if(std == '0'){
 			$('#stdroom').attr('disabled', '');
+			$('#stdroom').attr('value', '0');
+		}		
+	}
+
+	function markupRoomType(roomType){
+		var html = '';
+		if(roomType instanceof Array){
+			if(roomType.length == 4){
+				if(roomType[0] == '1')
+					html += 'Superior Single, ';
+				if(roomType[1] == '1')
+					html += 'Superior Double, ';
+				if(roomType[2] == '1')
+					html += 'Standard Single, ';
+				if(roomType[3] == '1')
+					html += 'Standard Double, '; 
+				return html;
+			}
+		}
+		return false;
 	}
 
 	return {
@@ -76,20 +127,20 @@ app.Markup  = (function($){
 		hotelList : function(id, name, feature, roomType, address, phone, postalCode){
 			
 			var html = '';
-			var roomType;
-			if(!roomType = markupRoomType(roomType))
+			var room;
+			if(!(room = markupAttrRoomType(roomType)))
 				return false;
 			if(!id && !name)
-				return ;
+				return false;
 			else{
-				html += "<div id = 'element-" + id + roomType + "' class = 'element well'>";
+				html += "<div id = 'element-" + id + "' " + room + " class = 'element well'>";
 				html += "<h4 class = 'hotel-name text-info text-center'>" + name + "</h4>";
 				html += "<div class = 'hotel-description'>";
 				html += "<dl class='dl-horizontal'>";
 				html += "<dt>Feature : </dt>";
-				html += "<dd>" + markupList(feature) + "</dd>";
+				html += "<dd>" + markupFeature(feature) + "</dd>";
 				html += "<dt>Roomtypes : </dt>";
-				html += "<dd>" + markupList(roomType) + "</dd>";
+				html += "<dd>" + markupRoomType(roomType) + "</dd>";
 				html += "<dt>Address : </dt>";
 				html += "<dd>" + markupValue(address) + "</dd>";
 				html += "<dt>Telephone : </dt>";
@@ -140,6 +191,72 @@ app.uiHandle = (function($){
 
 		hideFullPageLoading : function(){
 			$('#app').hideLoading();
+		},
+
+		showErrorMsgSearch : function(){
+			$('#main-panel-msg').removeClass('inactive');
+		},
+
+		hideErrorMsgSearch : function(){
+			$('#main-panel-msg').addClass('inactive');
+		},
+
+		showSearchResult : function(html){
+			$('#main-panel').append(html);
+		},
+
+		hideSearchResult : function(){
+			$('#main-panel').empty();	
+		},
+
+		datePickerHandle : function(){
+
+			var nowTemp = new Date();
+			var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+			var checkin = $('#startDate').datepicker({
+			 
+			  	onRender: function(date) {
+			    	return date.valueOf() <= now.valueOf() ? 'disabled' : '';
+			  	}
+			
+			}).on('changeDate', function(ev) {
+				
+				if (ev.date.valueOf() >= checkout.date.valueOf()) {
+				    	
+				    	var newDate = new Date(ev.date)
+				    	newDate.setDate(newDate.getDate() + 1);
+				    	checkout.setValue(newDate);
+				}
+			  	
+			  	checkin.hide();
+			  	$('#endDate')[0].focus();
+			
+			}).data('datepicker');
+			
+			var checkout = $('#endDate').datepicker({
+			  	
+			  	onRender: function(date) {
+			    	return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+			  	}
+			
+			}).on('changeDate', function(ev) {
+			  
+				checkout.hide();
+
+			}).data('datepicker');
+		},
+
+		showBookingMsg : function(success){
+			if(success)
+				$('#book-success-msg').removeClass('inactive');
+			else
+				$('#book-error-msg').removeClass('inactive');
+		},
+
+		hideBookingMsg : function(){
+			$('#book-success-msg').addClass('inactive');
+			$('#book-error-msg').addClass('inactive');
 		}
 	}
 }(jQuery));
@@ -149,6 +266,7 @@ app.ajaxHandle = (function($){
 	var api = {
 		ACTION : {
 			search : 'search',
+			book : 'book',
 		},
 
 		SEARCH : {
@@ -163,7 +281,14 @@ app.ajaxHandle = (function($){
 			roomType4 : null, 	//standard double
 		},
 		BOOK:{
-
+			id : null,
+			startDate : null,
+			endDate : null,
+			ss  : 0,
+			sd  : 0,
+			sts : 0,
+			std : 0,
+			bookingDate : null,
 		},
 	};
 
@@ -201,9 +326,67 @@ app.ajaxHandle = (function($){
 		return true;
 	};
 
+	function retrieveBookParams(){
+
+ 		api.BOOK.id        = $('#book-popup').attr('data-id');
+ 		api.BOOK.startDate = $('#startDate input').val();
+ 	    api.BOOK.endDate   = $('#endDate input').val();
+ 	    api.BOOK.ss        = $('#ssroom').val();
+ 	    api.BOOK.sd        = $('#sdroom').val();
+ 	    api.BOOK.sts       = $('#stsroom').val();
+ 	    api.BOOK.std       = $('#stdroom').val();
+
+ 	    if(api.BOOK.startDate == null || api.BOOK.endDate == null)
+ 	    	return false;
+
+ 	    if(!$.isNumeric(api.BOOK.ss))
+ 	    	api.BOOK.ss = 0;
+ 	    if(!$.isNumeric(api.BOOK.sd))
+ 	    	api.BOOK.sd = 0;
+ 	    if(!$.isNumeric(api.BOOK.sts))
+ 	    	api.BOOK.sts = 0;
+ 	    if(!$.isNumeric(api.BOOK.std))
+ 	    	api.BOOK.std = 0;
+
+ 	    if(api.BOOK.ss == 0 && api.BOOK.sd == 0 && api.BOOK.sts ==0 && api.BOOK.std == 0)
+ 	    	return false;
+
+ 	    var nowTemp = new Date();
+		api.BOOK.bookingDate = nowTemp.getFullYear() + "-" + nowTemp.getMonth() + "-" + nowTemp.getDate() + "-";  
+
+		return true;
+	};
+
 	function searchSuccessHandle(action, data){
 		app.uiHandle.hideFullPageLoading();
 		//solve data success callback
+		if(typeof data.status != 'undefined'){
+			if(data.status.code == '100'){
+				app.uiHandle.showErrorMsgSearch();
+			}
+			else{
+				if(data.status.code == '200'){
+					if(data.data){
+						var feature  = Array();
+						var hotel    = Array();
+						var roomType = Array();
+						var html ;
+						for(var i = 0 ; i < data.data.length ; i++){
+							feature  = data.data[i].feature;
+							hotel    = data.data[i].hotel;
+							roomType = data.data[i].roomType;
+							html     = app.Markup.hotelList(hotel[0], hotel[1], feature, roomType, hotel[2], hotel[3], hotel[4]);
+
+							app.uiHandle.showSearchResult(html);
+						}
+
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	};
 
 	function searchErrorHandle(action, error){
@@ -211,10 +394,24 @@ app.ajaxHandle = (function($){
 		console.log(action + ' is ' + error);
 	}
 
+	function bookSuccessHandle(action, data){
+		app.uiHandle.hideFullPageLoading();
+
+		if(typeof data.status != 'undefined')
+			if(data.status.code == '200')
+				app.uiHandle.showBookingMsg(true);
+			else
+				app.uiHandle.showBookingMsg(false);
+
+		return true;
+	}
+
 	return {
 
 		ajaxCallSearch : function(){
 			app.uiHandle.searchReturnNormalState();
+			app.uiHandle.hideErrorMsgSearch();
+			app.uiHandle.hideSearchResult();
 
 			if(!retrieveSearchParams())
 				return false;
@@ -233,8 +430,32 @@ app.ajaxHandle = (function($){
 			postParam['roomType2'] = api.SEARCH.roomType2;
 			postParam['roomType3'] = api.SEARCH.roomType3;
 			postParam['roomType4'] = api.SEARCH.roomType4;
-			console.log(postParam['feature1']);
+
 			app.Ajax.ajaxCall(action, postParam, searchSuccessHandle, searchErrorHandle);
+ 		},
+
+ 		ajaxCallBook : function(){
+
+ 			if(!retrieveBookParams())
+ 				return false;
+
+ 			app.uiHandle.showFullPageLoading();
+ 			app.uiHandle.hideBookingMsg();
+
+			var action = api.ACTION.book;
+
+			var postParam = {};
+
+			postParam['bookingID']  = api.BOOK.id;
+			postParam['startDate'] = api.BOOK.startDate;
+			postParam['endDate']   = api.BOOK.endDate;
+			postParam['roomType1']  = api.BOOK.ss;
+			postParam['roomType2']  = api.BOOK.sd;
+			postParam['roomType3'] = api.BOOK.sts;
+			postParam['roomType4'] = api.BOOK.std;
+			postParam['bookingDate'] = api.BOOK.bookingDate;
+
+			app.Ajax.ajaxCall(action, postParam, bookSuccessHandle, searchErrorHandle);	
  		}
 	}
 
@@ -248,44 +469,29 @@ app.ButtonHandle = (function($){
 			})
 		},
 
-		bookBtnHandle : function(){
-			$('.book-btn').on('click', function(e){
-				
+		booknowBtnHandle : function(){
+			$(document).on('click','.book-btn', function(e){
+
 				var id = $(e.target).attr('data-id');
-				
+				$('#book-popup').modal();
 				app.Markup.changeBookingPopup(id);
+				app.uiHandle.hideBookingMsg();
 			})
 		},
+
+		bookBtnHandle: function(){
+			$(document).on('click','.book', function(){
+				app.ajaxHandle.ajaxCallBook();
+			})
+		}
 	};
 }(jQuery))
 
 $(document).ready(function(){
 
 	app.ButtonHandle.searchBtnHandle();
-//	$('#startDate').datepicker();
-//    $('#endDate').datepicker();
-/*    var nowTemp = new Date();
-	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-	 
-	var checkin = $('#startDate').datepicker({
-	  onRender: function(date) {
-	    return date.valueOf() < now.valueOf() ? 'disabled' : '';
-	  }
-	}).on('changeDate', function(ev) {
-	  if (ev.date.valueOf() > checkout.date.valueOf()) {
-	    var newDate = new Date(ev.date)
-	    newDate.setDate(newDate.getDate() + 1);
-	    checkout.setValue(newDate);
-	  }
-	  checkin.hide();
-	  $('#endDate')[0].focus();
-	}).data('datepicker');
-	var checkout = $('#endDate').datepicker({
-	  onRender: function(date) {
-	    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-	  }
-	}).on('changeDate', function(ev) {
-	  checkout.hide();
-	}).data('datepicker');*/
+	app.ButtonHandle.booknowBtnHandle();
 	app.ButtonHandle.bookBtnHandle();
+
+	app.uiHandle.datePickerHandle();
 })

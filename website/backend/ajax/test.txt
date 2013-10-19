@@ -1,1 +1,4 @@
-go here0
+SELECT DISTINCT h.hotelID FROM Hotel h
+                        INNER JOIN RoomType r ON r.hotelID = h.hotelID
+                        WHERE (INSTR(h.address, 'Singapore') > 0
+                        AND r.price BETWEEN 0 AND 9999999)

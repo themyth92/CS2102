@@ -73,11 +73,15 @@
 	define('ROOM_TYPE_4'					, 'roomType4');
 
 	define('BOOKING_ID'						, 'bookingID');
+	define('START_DATE'						, 'startDate');
+	define('END_DATE'						, 'endDate');
+	define('BOOKING_DATE'					, 'bookingDate');
 	/*
 		browser action
 	*/
 	define('MANAGE'							, 'manage');
 	define('REMOVE'							, 'remove');
+	define('MODIFY'							, 'modify');
 	/*	
 		table contant
 	*/

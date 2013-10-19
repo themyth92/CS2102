@@ -144,28 +144,9 @@
 			</div>
 
 			<!-- main panel -->
+			<div id = 'main-panel-msg' class = 'text-error inactive main-panel'>No data retrieve</div>
 			<div id = 'main-panel' class = 'main-panel'>
-				<div id = 'element-1' class = 'element well' ss = '0' sd = '1' sts = '0' std = '1'>
-					<h4 class = 'hotel-name text-info text-center'>What the fuck !!!</h4>
-					<div class = 'hotel-description'>
-						<dl class="dl-horizontal">
-						  <dt>Feature : </dt>
-						  <dd>What the fuck is that thing ???</dd>
-						  <dt>Roomtypes : </dt>
-						  <dd>What the fuck is that thing ???</dd>
-						  <dt>Address : </dt>
-						  <dd>What the fuck is that thing ???</dd>
-						  <dt>Telephone : </dt>
-						  <dd>What the fuck is that thing ???</dd>
-						  <dt>Postal code : </dt>
-						  <dd>What the fuck is that thing ???</dd>
-						</dl>
-					</div>
-					<!--book button-->
-					<div class = 'align-center'>
-						<input id = 'search-btn' class="btn btn-primary book-btn" data-id = '1' type="submit" value = 'Book now!' data-toggle="modal" data-target="#book-popup">
-					</div>
-				</div>
+				
 			</div>
 
 			<!-- booking markup-->
@@ -183,14 +164,14 @@
 			  	<div class = 'text-success inactive' id = 'book-success'>Success!</div>
 			  	<!--calendar-->
 			  	<div class = 'modal-body-group'>
-			  		<div id="startDate" class="input-append date" data-date data-date-format="dd-mm-yyyy">
+			  		<div id="startDate" class="input-append date" data-date data-date-format="yyyy-mm-dd">
 			  			<label class="control-label">Start Date</label>
-					    <input class="span2" size="16" type="text" value>
+					    <input class="span2" size="16" type="text" readonly value>
 					    <span class="add-on"><i class = "icon-calendar"></i></span>
 					 </div>
-					 <div id="endDate" class="input-append date" data-date data-date-format="dd-mm-yyyy">
+					 <div id="endDate" class="input-append date" data-date data-date-format="yyyy-mm-dd">
 					 	<label class="control-label">End Date</label>
-					    <input class="span2" size="16" type="text" value>
+					    <input class="span2" size="16" type="text" readonly value>
 					    <span class="add-on"><i class = "icon-calendar"></i></span>
 					 </div>
 			  	</div>
@@ -201,13 +182,13 @@
 					  	<div class="control-group">
 						    <label class="control-label">Superior Single</label>
 						    <div class="controls">
-						      <input type="number" id="ssroom" class = 'span3'>
+						      <input type="number" min = "0" step = "1" id="ssroom" class = 'span3'>
 						    </div>
 						</div>
 						<div class="control-group">
 						    <label class="control-label">Superior Double</label>
 						    <div class="controls">
-						      <input type="number" id="sdroom" class = 'span3'>
+						      <input type="number" min = "0" step = "1" id="sdroom" class = 'span3'>
 						    </div>
 						</div>
 					</div>
@@ -215,13 +196,13 @@
 						<div class="control-group">
 						    <label class="control-label">Standard Single</label>
 						    <div class="controls">
-						      <input type="number" id="stsroom" class = 'span3'>
+						      <input type="number" min = "0" steap = "1" id="stsroom" class = 'span3'>
 						    </div>
 						</div>
 						<div class="control-group">
 						    <label class="control-label">Standard Double</label>
 						    <div class="controls">
-						      <input type="number" id="stdroom" class = 'span3'>
+						      <input type="number" min = "0" step = "1" id="stdroom" class = 'span3'>
 						    </div>
 						</div>  
 					</div>
@@ -230,9 +211,10 @@
 
 			  <!-- footer pop up --> 
 			  <div class="modal-footer">
-			  	<div class = 'preloader inactive' id = 'preloader'><img src = 'image/preloader.gif'/></div>
+			  	<div class = 'preloader text-error inactive' id = 'book-error-msg'>We can not book your room due to availability of the hotel</div>
+			  	<div class = 'preloader text-success inactive' id = 'book-success-msg'>Success!!!</div>
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary">Book</button>
+			    <button class="btn btn-primary book">Book</button>
 			  </div>
 
 			</div>
